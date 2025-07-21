@@ -24,6 +24,6 @@ app.get('/api/news', async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
+app.listen(5000, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
