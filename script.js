@@ -1,4 +1,4 @@
-const apiKey = '80d84ddb6e6548d5bd170d89c2e57031'; // Replace with your NewsAPI key
+const apiKey = ''; // Replace with your NewsAPI key
 const newsList = document.getElementById('news-list');
 const categorySelect = document.getElementById('category');
 const searchInput = document.getElementById('searchInput');
@@ -20,22 +20,16 @@ document.addEventListener('DOMContentLoaded', () => {
 async function fetchNews() {
   const category = categorySelect.value;
   const searchQuery = searchInput.value;
-  let url = '';
 
-  if (searchQuery && !category) {
-    // Only search query -> use everything endpoint
-    url = `https://newsapi.org/v2/everything?q=${searchQuery}&apiKey=${apiKey}`;
-  } else {
-    // top-headlines supports category and query
-    url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=${apiKey}`;
-    if (category) url += `&category=${category}`;
-    if (searchQuery) url += `&q=${searchQuery}`;
-  }
+  const url = new URL('http://localhost:5000/api/news');
+  if (category) url.searchParams.append('category', category);
+  if (searchQuery) url.searchParams.append('query', searchQuery);
 
   const res = await fetch(url);
   const data = await res.json();
   displayNews(data.articles || []);
 }
+
 
 // Display news
 function displayNews(articles) {
