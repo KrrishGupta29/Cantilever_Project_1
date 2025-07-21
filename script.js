@@ -1,4 +1,4 @@
-const apiKey = ''; // Replace with your NewsAPI key
+
 const newsList = document.getElementById('news-list');
 const categorySelect = document.getElementById('category');
 const searchInput = document.getElementById('searchInput');
